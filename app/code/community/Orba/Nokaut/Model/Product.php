@@ -74,7 +74,7 @@ class Orba_Nokaut_Model_Product extends Mage_Catalog_Model_Product {
                                         if ($product->getData($value_data['code'])) {
                                             $option = $options[$product->getData($value_data['code'])];
                                             if ($option == $value_data['value']) {
-                                                $core_attrs[$attr] = $value;
+                                                $attrs[$attr] = $value;
                                                 break;
                                             }
                                         }
