@@ -115,7 +115,6 @@ class Orba_Nokaut_Adminhtml_MappingController extends Mage_Adminhtml_Controller_
             ->load($this->getRequest()->getParam('id'));
         if ($this->run($mapping)) {
             $this->_getSession()->addSuccess(Mage::helper('nokaut')->__('The mapping has been finished successfully.'));
-            $mapping->reindexFlatCatalogIfNeccesary();
         }
         $this->_redirect('*/*');
     }
@@ -133,7 +132,6 @@ class Orba_Nokaut_Adminhtml_MappingController extends Mage_Adminhtml_Controller_
         }
         if (!$error) {
             $this->_getSession()->addSuccess(Mage::helper('nokaut')->__('The mapping has been finished successfully.'));
-            Mage::getModel('nokaut/mapping')->reindexFlatCatalogIfNeccesary();
         }
         $this->_redirect('*/*');
     }

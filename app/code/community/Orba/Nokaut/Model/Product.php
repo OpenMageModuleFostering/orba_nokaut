@@ -1,4 +1,5 @@
 <?php
+
 class Orba_Nokaut_Model_Product extends Mage_Catalog_Model_Product {
     
     protected function getConfig() {
@@ -26,6 +27,8 @@ class Orba_Nokaut_Model_Product extends Mage_Catalog_Model_Product {
             ->addAttributeToSelect('nokaut_category_id')
             ->addAttributeToSelect('price')
             ->addAttributeToSelect('special_price')
+            ->addAttributeToSelect('special_from_date')
+            ->addAttributeToSelect('special_to_date')
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('description')
             ->addAttributeToSelect('short_description')
@@ -42,7 +45,7 @@ class Orba_Nokaut_Model_Product extends Mage_Catalog_Model_Product {
         $product_collection = $this->addMediaGalleryAttributeToCollection($product_collection);
         $offers = array();
         $_category = Mage::getModel('nokaut/category');
-        $images_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'catalog/product';
+        $images_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'catalog/product';
         foreach ($product_collection as $product) {
             if ($product->isVisibleInSiteVisibility() && $product->isVisibleInCatalog()) {
                 $attrs = array();
@@ -51,10 +54,10 @@ class Orba_Nokaut_Model_Product extends Mage_Catalog_Model_Product {
                         if (!empty($data['code']) && $product->getData($data['code']) !== null) {
                             $options = $additional_attributes[$data['code']];
                             if (empty($options)) {
-                                $attrs[$attr] = (int)($product->getData($data['code']) == $data['value']);
+                                $attrs[$attr] = (int) ($product->getData($data['code']) == $data['value']);
                             } else {
                                 $option = array_search($product->getData($data['code']), $options);
-                                $attrs[$attr] = (int)($option == $data['value']);
+                                $attrs[$attr] = (int) ($option == $data['value']);
                             }
                         }
                     } else if (array_key_exists('values', $data)) {
@@ -102,7 +105,7 @@ class Orba_Nokaut_Model_Product extends Mage_Catalog_Model_Product {
                 $images = (isset($media_gallery['images'])) ? $media_gallery['images'] : array();
                 if (count($images) > 0) {
                     $img = array_pop($images);
-                    $image = $images_url.$img['file'];
+                    $image = $images_url . $img['file'];
                 }
                 $category = $_category->load($product->getNokautCategoryId())->getName();
                 $price = $this->getFinalPriceIncludingTax($product);
@@ -133,10 +136,10 @@ class Orba_Nokaut_Model_Product extends Mage_Catalog_Model_Product {
 					`value`.`label`, `value`.`position`, `value`.`disabled`, `default_value`.`label` AS `label_default`,
 					`default_value`.`position` AS `position_default`,
 					`default_value`.`disabled` AS `disabled_default`
-				FROM `'.Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_media_gallery').'` AS `main`
-					LEFT JOIN `'.Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_media_gallery_value').'` AS `value`
+				FROM `' . Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_media_gallery') . '` AS `main`
+					LEFT JOIN `' . Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_media_gallery_value') . '` AS `value`
 						ON main.value_id=value.value_id AND value.store_id=' . Mage::app()->getStore()->getId() . '
-					LEFT JOIN `'.Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_media_gallery_value').'` AS `default_value`
+					LEFT JOIN `' . Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_media_gallery_value') . '` AS `default_value`
 						ON main.value_id=default_value.value_id AND default_value.store_id=0
 				WHERE (
 					main.attribute_id = ' . $_read->quote($_mediaGalleryAttributeId) . ') 
@@ -173,7 +176,12 @@ class Orba_Nokaut_Model_Product extends Mage_Catalog_Model_Product {
         foreach ($category_ids as $category_id) {
             $_category->load($category_id);
             if ($_category->getId()) {
-                $ids = $_category->getProductCollection()->getAllIds();
+                foreach ($_category->getProductCollection() as $product) {
+                    $id = $product->getId();
+                    if (!isset($ids[$id])) {
+                        $ids[$id] = $id;
+                    }
+                }
             }
         }
         return $ids;
@@ -191,7 +199,7 @@ class Orba_Nokaut_Model_Product extends Mage_Catalog_Model_Product {
             }
         } catch (Exception $e) {
             $error = true;
-            Mage::log($e->getMessage(), null, 'nokautpro.log');
+            Mage::log($e->getMessage(), null, 'nokaut.log');
         }
         return !$error;
     }

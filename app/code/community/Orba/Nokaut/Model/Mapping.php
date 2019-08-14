@@ -52,11 +52,4 @@ class Orba_Nokaut_Model_Mapping extends Mage_Core_Model_Abstract {
         }
     }
     
-    public function reindexFlatCatalogIfNeccesary() {
-        if ($this->getConfig()->isFlatCatalogEnabled()) {
-            $process = Mage::getModel('index/process')->load(4);
-            $process->reindexAll();
-        }
-    }
-    
 }

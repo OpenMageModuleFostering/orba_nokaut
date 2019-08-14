@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-       <Orba_Nokaut>
-          <version>0.2.2</version>
-       </Orba_Nokaut>
+        <Orba_Nokaut>
+            <version>0.2.3.1</version>
+        </Orba_Nokaut>
     </modules>
     <frontend>
         <routers>
@@ -44,8 +44,8 @@
                 <resourceModel>nokaut_mysql4</resourceModel>
             </nokaut>
             <nokaut_mysql4>
-				<class>Orba_Nokaut_Model_Mysql4</class>
-				<entities>
+                <class>Orba_Nokaut_Model_Mysql4</class>
+                <entities>
                     <category>
                         <table>orba_nokaut_category</table>
                     </category>
