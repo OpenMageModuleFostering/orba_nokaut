@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <nokaut translate="title" module="nokaut">
+                    <title>ORBA | Nokaut.pl</title>
+                    <children>
+                        <index translate="title" module="nokaut">
+                            <title>Offer</title>
+                            <action>nokaut/adminhtml_offer/index</action>
+                        </index>
+                        <mappings translate="title" module="nokaut">
+                            <title>Mass Categories Mapping</title>
+                            <action>nokaut/adminhtml_mapping/index</action>
+                        </mappings>
+                        <feed_url translate="title" module="nokaut">
+                            <title>Feed URLs</title>
+                            <action>nokaut/adminhtml_offer/urls</action>
+                        </feed_url>
+                        <config translate="title" module="nokaut">
+                            <title>Configuration</title>
+                            <action>adminhtml/system_config/edit/section/nokaut</action>
+                        </config>
+                    </children>
+                    <sort_order>280</sort_order>
+                </nokaut>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <nokaut translate="title" module="nokaut">
+                                <title>ORBA | Nokaut.pl</title>
+                                <sort_order>280</sort_order>
+                                <children>
+                                    <index translate="title" module="nokaut">
+                                        <title>Offer</title>
+                                        <sort_order>10</sort_order>
+                                    </index>
+                                    <mappings translate="title" module="nokaut">
+                                        <title>Mass Categories Mapping</title>
+                                        <sort_order>20</sort_order>
+                                    </mappings>
+                                    <feed_url translate="title" module="nokaut">
+                                        <title>Feed URLs</title>
+                                        <sort_order>30</sort_order>
+                                    </feed_url>
+                                </children>
+                            </nokaut>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
