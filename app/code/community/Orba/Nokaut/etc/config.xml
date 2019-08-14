@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Orba_Nokaut>
-            <version>0.2.3.1</version>
+            <version>1.0.0</version>
         </Orba_Nokaut>
     </modules>
     <frontend>
@@ -131,13 +131,13 @@
     </adminhtml>
     <admin>
         <routers>
-            <nokaut>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>Orba_Nokaut</module>
-                    <frontName>nokaut</frontName>
+                    <modules>
+                        <nokaut before="Mage_Adminhtml">Orba_Nokaut_Adminhtml</nokaut>
+                    </modules>
                 </args>
-            </nokaut>
+            </adminhtml>
         </routers>
     </admin>
 </config>

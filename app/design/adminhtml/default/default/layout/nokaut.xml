@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout>
-    <nokaut_adminhtml_offer_index>
+    <adminhtml_nokaut_offer_index>
         <reference name="menu">
             <action method="setActive"><menupath>catalog/nokaut</menupath></action>
         </reference>
@@ -11,23 +11,23 @@
                 </block>
             </block>
         </reference>
-    </nokaut_adminhtml_offer_index>
-    <nokaut_adminhtml_offer_urls>
+    </adminhtml_nokaut_offer_index>
+    <adminhtml_nokaut_offer_urls>
         <reference name="content">
             <block type="nokaut/admin_offer_urls" name="offer_urls" />
         </reference>
-    </nokaut_adminhtml_offer_urls>
-    <nokaut_adminhtml_mapping_index>
+    </adminhtml_nokaut_offer_urls>
+    <adminhtml_nokaut_mapping_index>
         <reference name="menu">
             <action method="setActive"><menupath>catalog/nokaut</menupath></action>
         </reference>
         <reference name="content">
             <block type="nokaut/admin_mapping" name="nokaut_mapping" />
         </reference>
-    </nokaut_adminhtml_mapping_index>
-    <nokaut_adminhtml_mapping_edit>
+    </adminhtml_nokaut_mapping_index>
+    <adminhtml_nokaut_mapping_edit>
         <reference name="content">
             <block type="nokaut/admin_mapping_edit" name="mapping_edit" template="nokaut/mapping/edit.phtml" />
         </reference>
-    </nokaut_adminhtml_mapping_edit>
+    </adminhtml_nokaut_mapping_edit>
 </layout>
