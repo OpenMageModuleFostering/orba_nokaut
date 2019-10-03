@@ -1,3 +1,5 @@
+
+
 ## Original Package Description
 
 The extension integrates your store with Nokaut.pl platform.
